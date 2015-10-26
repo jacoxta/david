@@ -1,0 +1,11 @@
+{% extends "estructura.html" %}
+
+{% block contenido %}
+{% for linea in entrada %}
+		<article>
+				<a href="{% url 'blog.views.entrada' linea.pk %}"><h3>{{ linea.titulo }}</h3></a>
+			<time>{{ linea.fecha }}</time>
+			<p>{{ linea.contenido }}</p>
+		</article>
+		{% endfor %}
+{% endblock %}

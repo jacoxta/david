@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Primera aplicacion DJANGO</title>
+<meta charset="utf-8">
+<style type="text/css">
+    body{
+    	margin: 0px;
+    	padding: 0px;
+    	background: rgb(220,220,220);
+    }
+    #contenido{
+    	width: 90%;
+    	margin: auto;
+    	margin-top: 5px;
+    	margin-bottom: 10px;
+    	background: rgb(250,250,250);
+    	box-shadow: 0px 10px 15px rgba(0,0,0,1);
+    	padding: 15px;
+    }
+    p{
+    	text-align: justify;
+    	font-family: sans-serif;
+    	font-size: 12px;
+    	color: rgb(100,100,100);
+    }
+    h1,h2,h3,h4{
+    	margin: 0px;
+    	padding: 0px;
+    	color: rgb(50,50,50);
+    	font-family: serif;
+    }
+    article p{
+    	padding-left: 20px;
+    }
+
+    article{
+    	border-bottom: 1px dashed grey;
+    	padding-top: 10px;
+    	padding-bottom: 10px;
+    }
+
+    #articulos{
+        width: 65%;
+        float: left;
+
+    }
+
+    aside{
+        width: 30%;
+        float: right;
+        background: rgb(240, 240, 240);
+        padding: 10px;
+    }
+    header a{
+        text-decoration: none;
+    }
+
+    </style>
+    </head>
+    <body>
+	<div id="contenido">
+	<header>
+		<a href="/" title="Regresar a la pagina principal"><h1>Mi Blog</h1></a>
+		<h2>Blog de Miguel Benavides en DJANGO</h2>
+	</header>
+	<section>
+            <div id="articulos">
+            {% block contenido %}{% endblock %}
+            </div>
+            <aside>
+                <h4>Historico</h4>
+                {% for month in months %}
+                <p><a href="{% url 'blog.views.month' month.0 month.1 %}">{{ month }}</a></p>
+            {% endfor %}
+
+            <h4>Sobre mi</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </aside>
+	</section>
+    <div style="clear:both"></div>
+	<nav>
+	{% if entrada.has_previous %}
+		<a  href="?page={{ entrada.previus_page_number }}">página anterior </a>
+		{% endif %}
+
+		Pagina {{ entrada.number }} de {{ entrada.paginator.num_pages }}
+
+		{% if entrada.has_next %}
+		<a  href="?page={{ entrada.next_page_number }}">página siguiente </a>
+		{% endif %}
+	</nav>
+	<footer>
+		(c)2015 By Miguel
+	</footer>
+	</div>
+</body>
+</html>
